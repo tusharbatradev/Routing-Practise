@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { setBlockUsers } from "./redux/userSlice";
 
 const UserDetail = () => {
   const { userId } = useParams(); // Extract userId from URL
   const [user, setUser] = useState(null); // Initialize user as null
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const response = await fetch(`https://dummyjson.com/users/${userId}`);
@@ -19,6 +23,10 @@ const UserDetail = () => {
     return <h1>Loading...</h1>;
   }
 
+  const handleBlockUsers = () => {
+    dispatch(setBlockUsers(user))
+  }
+
   return (
     <div>
       <img src={user.image} alt={user.firstName} />
@@ -27,6 +35,9 @@ const UserDetail = () => {
       </h1>
       <h1>{user.email}</h1>
       <h1>{user.gender}</h1>
+      <button onClick={handleBlockUsers}>Block User</button>
+
+      <h1 onClick={() => navigate('/blockUser')}>Check Block Users</h1>
     </div>
   );
 };

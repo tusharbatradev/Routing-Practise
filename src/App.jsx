@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Home";
 import List from "./List";
 import UserDetail from "./UserDetail";
+import BlockUsers from "./BlockUsers";
 
 function App() {
   let appRouter = createBrowserRouter([
@@ -18,6 +19,11 @@ function App() {
       path: "userdetail/:userId",
       element: <UserDetail />,
     },
+    {
+      path: "blockUser",
+      element: <BlockUsers />,
+    },
+    ,
   ]);
 
   return (
